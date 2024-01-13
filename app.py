@@ -1,6 +1,5 @@
 import pickle
 import streamlit as st
-from streamlit_js_eval import streamlit_js_eval
 import requests
     
 
@@ -47,6 +46,7 @@ st.header('Recommendations')
 movies = pickle.load(open('artifacts/movie_list.pkl','rb'))
 similarity = pickle.load(open('artifacts/similarity.pkl','rb'))
 
+
 movie_list = movies['title'].values
 selected_movie = st.selectbox(
     "Select Movie:",
@@ -55,7 +55,6 @@ selected_movie = st.selectbox(
 
 if st.button('Recommend'):
     save_search(selected_movie)
-    streamlit_js_eval(js_expressions="parent.window.location.reload()")
     recommended_movie_names,recommended_movie_posters = recommend(selected_movie)
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
