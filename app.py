@@ -10,7 +10,6 @@ def save_search(movie):
     with open("archive/history.txt","r") as check:
         content = check.read()
         if movie in content:
-            print("movie already exists")
             pass
         else:
             with open('archive/history.txt','a') as file:
@@ -25,7 +24,6 @@ def fetch_poster(movie_id):
     return full_path
 
 def recommend(movie):
-    print("recom movie var -> ", movie)
     index = movies[movies['title'] == movie].index[0]
     distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
     recommended_movie_names = []

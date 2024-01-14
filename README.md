@@ -17,6 +17,7 @@ To take it one-step further, we also provide recommendations based on your _sear
 
 #### Learn More
 [Cosine Similarity](https://www.learndatasci.com/glossary/cosine-similarity/)
+<br>
 [Dataset Used](https://www.kaggle.com/tmdb/tmdb-movie-metadata?select=tmdb_5000_movies.csv)
 
 ## How To Use
@@ -38,7 +39,7 @@ source activate movie
 pip install -r requirements.txt
 ```
 #### Generate Artifacts (Model Output)
-Run _ml_recommendation.ipynb_ file
+_Run **ml_recommendation.ipynb** file_
 
 ### Run
 ```
