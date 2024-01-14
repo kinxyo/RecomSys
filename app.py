@@ -1,8 +1,11 @@
+# IMPORTS
+from email.mime import base
+from numpy import full
 import pickle
 import streamlit as st
 import requests
     
-
+# FUNCTIONS
 def save_search(movie):
     with open("archive/history.txt","r") as check:
         content = check.read()
@@ -13,7 +16,6 @@ def save_search(movie):
             with open('archive/history.txt','a') as file:
                 file.write(f"{movie}\n")
 
-
 def fetch_poster(movie_id):
     url = "https://api.themoviedb.org/3/movie/{}?api_key=8265bd1679663a7ea12ac168da84d2e8&language=en-US".format(movie_id)
     data = requests.get(url)
@@ -23,6 +25,7 @@ def fetch_poster(movie_id):
     return full_path
 
 def recommend(movie):
+    print("recom movie var -> ", movie)
     index = movies[movies['title'] == movie].index[0]
     distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
     recommended_movie_names = []
@@ -36,16 +39,33 @@ def recommend(movie):
     return recommended_movie_names,recommended_movie_posters
 
 
-st.title('Movie Recommendation System')
-
-st.header("Search History")
-file = open("archive/history.txt","r")
-st.text(file.read())
-
-st.header('Recommendations')
+# GLOBAL VARIABLES
 movies = pickle.load(open('artifacts/movie_list.pkl','rb'))
 similarity = pickle.load(open('artifacts/similarity.pkl','rb'))
 
+
+# BODY
+st.title('Movie Recommendation System')
+
+# SECTION -- Based on Search History
+st.header("Based on Search History")
+based_list = []
+with open("archive/history.txt","r") as file:
+    films = file.readlines()
+    for title in films:
+        new_list = title.split("\n")
+        based_list.append(new_list[0])
+    
+    slot = st.columns(5)
+    for i in range(5):
+        based_movie,based_poster = recommend(based_list[i])
+        with slot[i]:
+            st.text(based_movie[0])
+            st.image(based_poster[0])
+
+
+# SECTION -- Based on Manual Search
+st.header('Manual Searching')
 
 movie_list = movies['title'].values
 selected_movie = st.selectbox(
