@@ -4,8 +4,11 @@
 Have you ever grown tired of conventional films and just wished to discover something fresh yet similar to your preferences?
 We provide a machine learning solution for it.<br>
 This Streamlit webapp is developed to personalize movie recommendations, catering to unique user preferences.
-All you have to do is, simply choose a movie that you enjoy and we will immediately suggest a collection of films that suit your taste.<br>
-![image](https://github.com/kinxyo/RecomSys/assets/90744941/51563498-789d-4b5d-bfb1-7173511f212b)
+All you have to do is, simply choose a movie that you enjoy and we will immediately suggest a collection of films that suit your taste.
+<br>
+<br>
+![RecomSys](https://github.com/kinxyo/RecomSys/assets/90744941/8808a4a2-d8ab-4cf0-b668-ef04e6f7101d)
+<br>
 To take this one-step further, we have enhanced our recommendations by utilizing search history data to gain a comprehensive understanding of user preferences. This allows us to get bigger picture of one's taste.
 ### Concept
 - Our product is powered by machine learning. 
@@ -46,12 +49,11 @@ streamlit run app.py
 ```
 
 ## Closing Remarks
-Completed this project as part of a college assignment.
+Completed this project as part of a college assignment. We used Streamlit so that we could focus on machine learning part without worrying about the frontend.
 <br>
-We used Streamlit so that we could focus on machine learning part without worrying about the frontend.
 Currently our system is content-based but we're very much inclined to push to a hybrid model (Content-based + Collaborative filtering).
 <br>
-We are also looking to upgrade to Flask to improve the frotend.
+We are also looking to upgrade to Flask to improve the frontend.
 ### Team
 - Kinjalk 
 - [Gitansh](https://github.com/Gitansh-Agarwal)
