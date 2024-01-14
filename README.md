@@ -1,13 +1,12 @@
 # Movie Recommendation System
 
 ## About
-Ever got bored of mainstream cinema and just wanted to watch some new stuff that still resemebles your taste?
+Have you ever grown tired of conventional films and just wished to discover something fresh yet similar to your preferences?
 We provide a machine learning solution for it.<br>
-This Streamlit webapp is designed to suggest variety of movies that align with a user's choice in films.
-All you have to do is select the movie you like, and we'll recommend you with bunch of films that will match your taste.<br>
-imghere.
-To take it one-step further, we also provide recommendations based on your _search history_ so that we get an even bigger picture of your taste, and are able to provide you much better suggestions.
-
+This Streamlit webapp is developed to personalize movie recommendations, catering to unique user preferences.
+All you have to do is, simply choose a movie that you enjoy and we will immediately suggest a collection of films that suit your taste.<br>
+![image](https://github.com/kinxyo/RecomSys/assets/90744941/51563498-789d-4b5d-bfb1-7173511f212b)
+To take this one-step further, we have enhanced our recommendations by utilizing search history data to gain a comprehensive understanding of user preferences. This allows us to get bigger picture of one's taste.
 ### Concept
 - Our product is powered by machine learning. 
 - Data pulled from the dataset is placed into a numpy array to achieve a vector form.
@@ -47,12 +46,14 @@ streamlit run app.py
 ```
 
 ## Closing Remarks
-This project was done as part of a small college project. <br>
+Completed this project as part of a college assignment.
+<br>
 We used Streamlit so that we could focus on machine learning part without worrying about the frontend.
 Currently our system is content-based but we're very much inclined to push to a hybrid model (Content-based + Collaborative filtering).
+<br>
 We are also looking to upgrade to Flask to improve the frotend.
 ### Team
-- Gitansh
-- Om
 - Kinjalk 
-- Himanshu
+- [Gitansh](https://github.com/Gitansh-Agarwal)
+- [Om](https://github.com/Ashu-Pablo) 
+- [Himanshu](https://github.com/xendai66)
