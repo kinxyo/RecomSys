@@ -3,11 +3,12 @@
 ## About
 Have you ever grown tired of conventional films and just wished to discover something fresh yet similar to your preferences?
 We provide a machine learning solution for it.<br>
-This Streamlit webapp is developed to personalize movie recommendations, catering to unique user preferences.
+This Streamlit webapp is developed to personalize movie recommendations, catering to unique user preferences.<br>
 All you have to do is, simply choose a movie that you enjoy and we will immediately suggest a collection of films that suit your taste.
 <br>
 <br>
 ![RecomSys](https://github.com/kinxyo/RecomSys/assets/90744941/8808a4a2-d8ab-4cf0-b668-ef04e6f7101d)
+<br>
 <br>
 To take this one-step further, we have enhanced our recommendations by utilizing search history data to gain a comprehensive understanding of user preferences. This allows us to get bigger picture of one's taste.
 ### Concept
