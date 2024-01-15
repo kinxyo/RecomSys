@@ -52,7 +52,7 @@ with open("archive/history.txt","r") as file:
     films = file.readlines()
     for title in films:
         new_list = title.split("\n")
-        based_list.append(new_list[0])
+        based_list.insert(0, new_list[0])
     
     slot = st.columns(5)
     for i in range(5):
