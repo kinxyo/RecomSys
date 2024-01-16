@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="{{ url_for('static', filename='style.css') }}"
+			rel="stylesheet"
+			type="text/css" />
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins">
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,900;1,300;1,800;1,900&display=swap" rel="stylesheet"> 
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,900;1,800;1,900&display=swap" rel="stylesheet">
+
+		<title>Document</title>
+	</head>
+	<body>
+		<div class="title">
+			<p style="font-weight: 200;">Navigate to Your Next Favourite.</p>
+            <h1 style="font-size: 3rem;">CinemaScope</h1>
+		</div>
+
+        <div class="menu-container">
+            <div class="menu"></div>
+            <div class="menu"></div>
+            <div class="menu"></div>
+        </div>
+
+
+		<div class="content">
+                <div style="width: 100%; height: 100%; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 40px; display: inline-flex">
+                    <div class="section">
+                        <div class="section-title">Based on Search History</div>
+                        <div class="img-container">
+                            <img class="img-placeholder" />
+                            <img class="img-placeholder" />
+                            <img class="img-placeholder" />
+                            <img class="img-placeholder" />
+                            <img class="img-placeholder" />
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="section-title">Manual Search</div>
+                            <div class="search-container">
+                                <input class="search-bar" type="text" placeholder="Search for a movie" />
+                                <img style="width: 25px; height: 25px;" src="/static/search.png"></div>
+                            </div>
+                        </div>
+                        <div class="img-container">
+                            <img class="img-placeholder" />
+                            <img class="img-placeholder" />
+                            <img class="img-placeholder" />
+                            <img class="img-placeholder" />
+                            <img class="img-placeholder" />
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+
+
+            <div class="footer">
+                <div class="footer-text">All rights reserved.</div>
+            </div>
+
+	</body>
+</html>
