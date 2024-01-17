@@ -31,26 +31,41 @@
                     <div class="section">
                         <div class="section-title">Based on Search History</div>
                         <div class="img-container">
-                            <img class="img-placeholder" />
-                            <img class="img-placeholder" />
-                            <img class="img-placeholder" />
-                            <img class="img-placeholder" />
-                            <img class="img-placeholder" />
+                            {% if history %}
+                                {% for movies in history %}
+                                    <!-- <h2>{{ movies.name }}</h2> -->
+                                    <img class="imgs" src="{{ movies.thumbnail }}" alt="Movie Poster">
+                                {% endfor %}
+                                
+                            {% else %}
+                                {% for i in range(5) %}
+                                    <img class="img-placeholder" />
+                                {% endfor %}
+                        
+                            {% endif %}                            
                         </div>
                     </div>
                     <div class="section">
                         <div class="section-title">Manual Search</div>
                             <div class="search-container">
-                                <input class="search-bar" type="text" placeholder="Search for a movie" />
-                                <img style="width: 25px; height: 25px;" src="/static/search.png"></div>
+                                <form style="display: flex;" action="/" method='POST' >
+                                    <input name="film" class="search-bar" type="text" placeholder="Search for a movie" />
+                                    <img style="width: 25px; height: 25px;" src="/static/search.png"></div>
+                                </form>
                             </div>
                         </div>
                         <div class="img-container">
-                            <img class="img-placeholder" />
-                            <img class="img-placeholder" />
-                            <img class="img-placeholder" />
-                            <img class="img-placeholder" />
-                            <img class="img-placeholder" />
+                            {% if posters %}
+                                {% for poster in posters %}
+                                    <img class="imgs" src="{{ poster }}" alt="Movie Poster">
+                                {% endfor %}
+                                
+                            {% else %}
+                                {% for i in range(5) %}
+                                    <img class="img-placeholder" />
+                                {% endfor %}
+                        
+                            {% endif %}                            
                         </div>
                     </div>
                 </div>
