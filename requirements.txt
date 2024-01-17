@@ -1,5 +1,6 @@
 ### dependency
-streamlit
+flask
+flask-sqlalchemy
 nltk
 scikit-learn
 
