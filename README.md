@@ -7,7 +7,7 @@ This webapp is developed to personalize movie recommendations, catering to uniqu
 All you have to do is, simply choose a movie that you enjoy and we will immediately suggest a collection of films that suit your taste.
 <br>
 <br>
-![RecomSys](https://github.com/kinxyo/RecomSys/assets/90744941/8808a4a2-d8ab-4cf0-b668-ef04e6f7101d)
+![recomsys](https://github.com/kinxyo/RecomSys/assets/90744941/07484206-dfcb-4ea9-babb-0edbc7bd1ab2)
 <br>
 <br>
 To take this one-step further, we have enhanced our recommendations by utilizing search history data to gain a comprehensive understanding of user preferences. This allows us to get bigger picture of one's taste.
@@ -50,7 +50,7 @@ python app.py
 ```
 
 ## Closing Remarks
-We've remade our previous Streamlit app in Flask to expand upon functionalities and provide more mordern UI.
+We've remade our previous Streamlit app in Flask to expand upon functionalities and provide a more mordern touch to the UI.
 <br>
 ### TEAM
 - Kinjalk 
