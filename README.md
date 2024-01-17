@@ -1,9 +1,9 @@
-# Movie Recommendation System
+# CinemaScope
 
 ## About
 Have you ever grown tired of conventional films and just wished to discover something fresh yet similar to your preferences?
-We provide a machine learning solution for it.<br>
-This Streamlit webapp is developed to personalize movie recommendations, catering to unique user preferences.<br>
+Well, this is a _machine learning_ solution for it.<br>
+This webapp is developed to personalize movie recommendations, catering to unique user preferences.<br>
 All you have to do is, simply choose a movie that you enjoy and we will immediately suggest a collection of films that suit your taste.
 <br>
 <br>
@@ -46,16 +46,13 @@ _Run **ml_recommendation.ipynb** file_
 
 ### Run
 ```
-streamlit run app.py
+python app.py
 ```
 
 ## Closing Remarks
-Completed this project as part of a college assignment. We used Streamlit so that we could focus on machine learning part without worrying about the frontend.
+We've remade our previous Streamlit app in Flask to expand upon functionalities and provide more mordern UI.
 <br>
-Currently our system is content-based but we're very much inclined to push to a hybrid model (Content-based + Collaborative filtering).
-<br>
-We are also looking to upgrade to Flask to improve the frontend.
-### Team
+### TEAM
 - Kinjalk 
 - [Gitansh](https://github.com/Gitansh-Agarwal)
 - [Om](https://github.com/Ashu-Pablo) 
