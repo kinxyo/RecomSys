@@ -4,7 +4,11 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link
-			href="{{ url_for('static', filename='style.css') }}"
+			href="{{ url_for('static', filename='style/main.css') }}"
+			rel="stylesheet"
+			type="text/css" />
+		<link
+			href="{{ url_for('static', filename='style/index.css') }}"
 			rel="stylesheet"
 			type="text/css" />
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins">
@@ -33,7 +37,6 @@
                         <div class="img-container">
                             {% if history %}
                                 {% for movies in history %}
-                                    <!-- <h2>{{ movies.name }}</h2> -->
                                     <img class="imgs" src="{{ movies.thumbnail }}" alt="Movie Poster">
                                 {% endfor %}
                                 
@@ -50,7 +53,7 @@
                             <div class="search-container">
                                 <form style="display: flex;" action="/" method='POST' >
                                     <input name="film" class="search-bar" type="text" placeholder="Search for a movie" />
-                                    <img style="width: 25px; height: 25px;" src="/static/search.png"></div>
+                                    <img style="width: 25px; height: 25px;" src="/static/assets/search.png"></div>
                                 </form>
                             </div>
                         </div>
