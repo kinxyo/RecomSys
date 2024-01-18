@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<!-- META -->
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="{{ url_for('static', filename='style/main.css') }}"
+			rel="stylesheet"
+			type="text/css" />
+		<link
+			href="{{ url_for('static', filename='style/index.css') }}"
+			rel="stylesheet"
+			type="text/css" />
+		<link
+			href="{{ url_for('static', filename='style/base.css') }}"
+			rel="stylesheet"
+			type="text/css" />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Poppins" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,900;1,300;1,800;1,900&display=swap"
+			rel="stylesheet" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,900;1,800;1,900&display=swap"
+			rel="stylesheet" />
+
+		<title>RecomSys</title>
+	</head>
+	<body>
+
+        <div class="title">
+			<p style="font-weight: 200;">Navigate to Your Next Favourite.</p>
+            <h1 style="font-size: 3rem;">CinemaScope</h1>
+		</div>
+
+        <div class="menu-container">
+            <div class="menu"></div>
+            <div class="menu"></div>
+            <div class="menu"></div>
+        </div>
+
+
+		<div class="content">
+			{% block body %}
+            
+			{% endblock body %}
+		</div>
+
+		
+			<footer>
+				<p>All rights reserved ©</p>
+			</footer>
+		
+    </body>
+
+
+	</html>
