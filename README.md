@@ -1,5 +1,5 @@
 > [!IMPORTANT]
-> Incomplete App, Work is Still In Progress.
+> Work In Progress.
 
 # CinemaScope
 
