@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> Incomplete App, Work is Still In Progress.
+
 # CinemaScope
 
 ## About
