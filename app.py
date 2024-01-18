@@ -19,9 +19,23 @@ with app.app_context():
 @app.route('/', methods=['GET','POST'])
 def Home():
 
+    # DEFAULT BEHAVIOUR (FETCH SEARCH HISTORY)
+    movies_searched = []
 
-    if request.method == 'POST':
+    search_history = Records.query.order_by(Records.sno.desc()).limit(5).all()
         
+    for record in search_history:
+        movie, poster = recommend(record.title)
+        movies_searched.append({'name': movie[0], 'thumbnail': poster[0]})
+
+    if request.method == 'GET':        
+        return render_template("index.html", history=movies_searched)
+
+    
+    elif request.method == 'POST':
+        
+        recommendations = []
+
         # GETTING RECOMMENDATION
         film = request.form['film']
         movie, poster = recommend(film)
@@ -31,19 +45,11 @@ def Home():
         db.session.add(Records(title=film, recom_mov=movie[suggested], recom_thum=poster[suggested])) #the error is probably because there are no records yet, "what about the exception msg?" yeah it's bullshit. people who use python aren't really good at coding you know.
         db.session.commit()
         
-        return render_template("index.html", posters=poster)
+        for i in range(0,5):
+            recommendations.append({'title': movie[i], 'poster': poster[i]})
+
+        return render_template("index.html", recommendations=recommendations, history=movies_searched)
     
-
-    elif request.method == 'GET':
-        movies_searched = []
-
-        search_history = Records.query.order_by(Records.sno.desc()).limit(5).all()
-        
-        for record in search_history:
-            movie, poster = recommend(record.title)
-            movies_searched.append({'name': movie[0], 'thumbnail': poster[0]})
-
-        return render_template("index.html", history=movies_searched)
 
 
 if __name__ == "__main__":

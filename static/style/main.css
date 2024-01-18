@@ -6,16 +6,29 @@
 
 html {
 	scroll-behavior: smooth;
+	min-height: 100%;
 }
 
 body {
 	/* background-color: #08080c; */
-	background: linear-gradient(180deg, #101016 0%, #0F0F17 34%, #10101C 49%, #0a0f12 67%, #12121F 83%, #08080C 100%);
+	/* border: 2px solid white; */
+	min-height: 100vh;
+	background: linear-gradient(
+		180deg,
+		#101016 0%,
+		#0f0f17 34%,
+		#10101c 49%,
+		#0a0f12 67%,
+		#12121f 83%,
+		#08080c 100%
+	);
 	color: azure;
 	font-family: "Poppins";
 	font-size: 1rem;
 	padding-inline: 5rem;
 	padding-block: 2rem;
+	display: flex;
+	flex-direction: column;
 }
 
 *,
@@ -24,6 +37,12 @@ body {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+	scrollbar-width: thin;
+	scrollbar-color: rgba(255, 0, 111, 0) transparent;
+}
+
+*::-webkit-scrollbar {
+	display: none;
 }
 
 h1 {
