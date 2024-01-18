@@ -1,92 +1,56 @@
 # IMPORTS
-from email.mime import base
-from numpy import full
-import pickle
-import streamlit as st
-import requests
+import random
+from flask import Flask, render_template, request
+from backend.functions import recommend
+from backend.models import db
+from backend.models import Records
+
+# APP CONFIG
+app = Flask(__name__, template_folder="pages")
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///recomsys.db"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
+
+
+# ROUTES
+@app.route('/', methods=['GET','POST'])
+def Home():
+
+    # DEFAULT BEHAVIOUR (FETCH SEARCH HISTORY)
+    movies_searched = []
+
+    search_history = Records.query.order_by(Records.sno.desc()).limit(5).all()
+        
+    for record in search_history:
+        movie, poster = recommend(record.title)
+        movies_searched.append({'name': movie[0], 'thumbnail': poster[0]})
+
+    if request.method == 'GET':        
+        return render_template("index.html", history=movies_searched)
+
     
-# FUNCTIONS
-def save_search(movie):
-    with open("archive/history.txt","r") as check:
-        content = check.read()
-        if movie in content:
-            pass
-        else:
-            with open('archive/history.txt','a') as file:
-                file.write(f"{movie}\n")
+    elif request.method == 'POST':
+        
+        recommendations = []
 
-def fetch_poster(movie_id):
-    url = "https://api.themoviedb.org/3/movie/{}?api_key=8265bd1679663a7ea12ac168da84d2e8&language=en-US".format(movie_id)
-    data = requests.get(url)
-    data = data.json()
-    poster_path = data['poster_path']
-    full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
-    return full_path
+        # GETTING RECOMMENDATION
+        film = request.form['film']
+        movie, poster = recommend(film)
+        suggested = random.randint(0,5)
+        
+        # ADDING TO RECORDS 
+        db.session.add(Records(title=film, recom_mov=movie[suggested], recom_thum=poster[suggested])) #the error is probably because there are no records yet, "what about the exception msg?" yeah it's bullshit. people who use python aren't really good at coding you know.
+        db.session.commit()
+        
+        for i in range(0,5):
+            recommendations.append({'title': movie[i], 'poster': poster[i]})
 
-def recommend(movie):
-    index = movies[movies['title'] == movie].index[0]
-    distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
-    recommended_movie_names = []
-    recommended_movie_posters = []
-    for i in distances[1:6]:
-        # fetch the movie poster
-        movie_id = movies.iloc[i[0]].movie_id
-        recommended_movie_posters.append(fetch_poster(movie_id))
-        recommended_movie_names.append(movies.iloc[i[0]].title)
-
-    return recommended_movie_names,recommended_movie_posters
-
-
-# GLOBAL VARIABLES
-movies = pickle.load(open('artifacts/movie_list.pkl','rb'))
-similarity = pickle.load(open('artifacts/similarity.pkl','rb'))
-
-
-# BODY
-st.title('Movie Recommendation System')
-
-# SECTION -- Based on Search History
-st.header("Based on Search History")
-based_list = []
-with open("archive/history.txt","r") as file:
-    films = file.readlines()
-    for title in films:
-        new_list = title.split("\n")
-        based_list.insert(0, new_list[0])
+        return render_template("index.html", recommendations=recommendations, history=movies_searched)
     
-    slot = st.columns(5)
-    for i in range(5):
-        based_movie,based_poster = recommend(based_list[i])
-        with slot[i]:
-            st.text(based_movie[0])
-            st.image(based_poster[0])
 
 
-# SECTION -- Based on Manual Search
-st.header('Manual Searching')
-
-movie_list = movies['title'].values
-selected_movie = st.selectbox(
-    "Select Movie:",
-    movie_list
-)
-
-if st.button('Recommend'):
-    save_search(selected_movie)
-    recommended_movie_names,recommended_movie_posters = recommend(selected_movie)
-    col1, col2, col3, col4, col5 = st.columns(5)
-    with col1:
-        st.text(recommended_movie_names[0])
-        st.image(recommended_movie_posters[0])
-    with col2:
-        st.text(recommended_movie_names[1])
-        st.image(recommended_movie_posters[1])
-    with col3:
-        st.text(recommended_movie_names[2])
-        st.image(recommended_movie_posters[2])
-    with col4:
-        st.text(recommended_movie_names[3])
-        st.image(recommended_movie_posters[3])
-    with col5:
-        st.text(recommended_movie_names[4])
-        st.image(recommended_movie_posters[4])
+if __name__ == "__main__":
+    app.run(debug=True)
