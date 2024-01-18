@@ -3,6 +3,9 @@ flask
 flask-sqlalchemy
 nltk
 scikit-learn
+numpy
+pandas
+ipykernel
 
 ### local packages -
 -e . 
