@@ -6,6 +6,11 @@ scikit-learn
 numpy
 pandas
 ipykernel
+flask_login
+flask_bcrypt
+flask_wtf
+wtforms
+email_validator
 
 ### local packages -
 -e . 
