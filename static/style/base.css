@@ -1,6 +1,7 @@
 .title {
 	display: flex;
 	flex-direction: column;
+	gap: 0.5rem;
 }
 
 .menu-container {
@@ -21,8 +22,15 @@
 	border: 2px #53b9c6 solid;
 }
 
-.content {
+.container {
 	flex: 1;
+	width: 100%;
+	min-height: 100%;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 40px;
+	display: inline-flex;
 }
 
 footer {
