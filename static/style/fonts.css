@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'Special';
+    src: url('../fonts/SpaceGrotesk.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Tagline';
+    src: url('../fonts/Poppins-ExtraLight.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Body';
+    src: url('../fonts/Poppins-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Message';
+    src: url('../fonts/Poppins-SemiBold.woff2') format('woff2');
+}
+
+
+@font-face {
+    font-family: 'Header';
+    src: url('../fonts/Poppins-Bold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Title';
+    src: url('../fonts/Poppins-ExtraBold.woff2') format('woff2');
+}
