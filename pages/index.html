@@ -4,7 +4,7 @@
     
                 <div style="width: 100%; height: 100%; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 40px; display: inline-flex">
                     <div class="section">
-                        <div class="section-title">Based on Search History</div>
+                        <div class="section-title">You might also like</div>
                         <div class="container">
                             {% if history %}
                                 {% for movies in history %}
@@ -12,23 +12,24 @@
                                     <img class="poster" src="{{ movies.thumbnail }}" alt="Movie Poster">
                                     <div class="curtain">
                                         <h3> {{ movies.name }} </h3>
+                                        <a class="close" href="/delete/{{ movies.id }}"> x </a>
                                     </div>
                                 </div>
                                 {% endfor %}
                                 
                             {% else %}
-                                {% for i in range(5) %}
-                                    <img class="img-placeholder" />
-                                {% endfor %}
+                                <div class="void">
+                                    <h3>No history found.</h3>
+                                </div>
                         
                             {% endif %}                            
                         </div>
                     </div>
                     <div class="section">
-                        <div class="section-title">Manual Search</div>
+                        <!-- <div class="section-title">Tell us your favourite movie</div> -->
                             <div class="search-container">
                                 <form style="display: flex;" action="/" method='POST' >
-                                    <input name="film" class="search-bar" type="text" placeholder="Search for a movie" />
+                                    <input name="film" class="search-bar" type="text" placeholder="Tell us your favourite movie" />
                                     <img style="width: 25px; height: 25px;" src="/static/assets/search.png"></div>
                                 </form>
                             </div>

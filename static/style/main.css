@@ -65,3 +65,9 @@ h2 {
 	color: var(--clr-tertiary);
 	margin-bottom: 1rem;
 }
+
+h3 {
+	text-wrap: wrap;
+	word-break: keep-all;
+	text-align: center;
+}
