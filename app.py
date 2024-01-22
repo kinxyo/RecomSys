@@ -1,5 +1,6 @@
 # IMPORTS
 import random
+import stat
 from flask import Flask, render_template, request, redirect, url_for
 from backend.functions import *
 from backend.models import Records, db
@@ -17,7 +18,7 @@ with app.app_context():
 # ROUTES
 @app.route('/', methods=['GET','POST'])
 def Home():
-
+    found = True
     # DEFAULT BEHAVIOUR (FETCH SEARCH HISTORY)
     user_taste = []
 
@@ -29,22 +30,24 @@ def Home():
         user_taste.append({'name': movie[0], 'thumbnail': poster[0], 'id': id})
 
     if request.method == 'GET':        
-        return render_template("index.html", history=user_taste)
+        return render_template("index.html", history=user_taste, status=found)
 
     
     elif request.method == 'POST':
         
-            search_result = []
-
             film = request.form['film']
 
-            matching_movies = search_movie(film)
+            matching_movies = search_movie(film)            
             matching_movies_list = matching_movies.to_dict('records')
+
+            if matching_movies.empty:
+                found = False
 
             for movie in matching_movies_list:
                 movie['poster'] = fetch_poster(movie['movie_id'])
+            
 
-            return render_template("index.html", searchresults=matching_movies_list, history=user_taste)
+            return render_template("index.html", searchresults=matching_movies_list, status=found, history=user_taste)
 
     
 
@@ -84,10 +87,7 @@ def recom(movie_id):
     for i in range(0,5):
         recommendations.append({'id': id[i], 'title': movie[i], 'poster': poster[i]})
 
-    name, thumb = retrieve_movie(movie_id)
-
-
-    return render_template("recom.html", recommendations=recommendations, star={'name': name, 'thumbnail': thumb})
+    return render_template("recom.html", recommendations=recommendations, star=retrieve_movie(movie_id))
 
 
 if __name__ == "__main__":

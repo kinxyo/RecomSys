@@ -44,6 +44,16 @@
 			{% endfor %}
 		</div>
 	{% else %}
+		{% if status==False  %}
+		<div class="grow-flex center">
+			<div class="words">
+				<h3>No Matching Results.</h3>
+                <br>
+				<h3>(╯°□°)╯︵ ┻━┻</h3>
+			</div>
+		</div>
+		{% endif %}
+		{% if status==True  %}
 		<div class="grow-flex center">
 			<div class="words">
 				<h3>Nothing yet to show.</h3>
@@ -51,6 +61,7 @@
 				<h3>(╯°□°)╯︵ ┻━┻</h3>
 			</div>
 		</div>
+		{% endif %}
 	{% endif %}
 </div>
 

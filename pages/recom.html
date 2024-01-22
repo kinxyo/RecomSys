@@ -4,11 +4,14 @@
 
         <div class="row1">
 
-            <div class="content">
+            <div class="content curve">
                 
                 <img id="poster" src="{{ star.thumbnail }}" />
-                <div class="text">
+                <div style="display: flex; padding: 2rem; flex-direction: column; gap: 2rem; align-items: center;" class="text">
                     <h2>{{ star.name }}</h2>
+                    <p> {{ star.synopsis }} </p>
+                    <p> <b>Genre:</b> {{ star.genre }} </p>
+                    <p> <b>Cast:</b> {{ star.cast }} </p>
                 </div>
                 
             </div>
