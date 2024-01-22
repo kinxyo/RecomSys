@@ -15,7 +15,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
-	padding: 2rem 5rem;
+	padding: 2rem 4rem;
 	color: azure;
 	font-family: Body;
 	font-size: 1rem;
@@ -77,6 +77,7 @@ h3 {
 	word-break: keep-all;
 	text-align: center;
 	font-family: Message;
+	color: #edf0fe;
 }
 
 .link {
