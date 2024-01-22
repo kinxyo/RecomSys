@@ -70,7 +70,6 @@ def recom(movie_id):
     recommendations = []
 
     movie, poster, id, movie_searched = recommend(movie_id)
-
     suggested = random.randint(0,4)
     
     # ADDING TO RECORDS 
