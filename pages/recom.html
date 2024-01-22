@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% block body %}
+
+    <div class="main">
+
+        <div class="row1">
+
+            <div class="content">
+                
+                <img id="poster" src="{{ star.thumbnail }}" />
+                <div class="text">
+                    <h2>{{ star.name }}</h2>
+                </div>
+                
+            </div>
+            
+            <!-- <div style="background-color: palevioletred" class="bg-material">aksdjakjdh</div> -->
+            <div style="background-image: url('{{ star.thumbnail }}')" class="bg-material"></div>
+
+        </div>
+
+
+        <div class="row2">
+            
+            <div class="library grow-flex">
+                {% for recom in recommendations %}
+                        <a href="{{ url_for('recom', movie_id=recom.id) }}">
+                            <div class="card">
+                                <img class="poster" src="{{ recom.poster }}" alt="Movie Poster" />
+                                <div class="curtain">
+                                    <h3>{{ recom.title }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                {% endfor %}
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    {% endblock body %}
