@@ -63,8 +63,6 @@ def retrieve_movie(movie_id):
     movie_df = cinema[cinema['movie_id'] == movie_id]
     if not movie_df.empty:
         poster = fetch_poster(movie_id)
-        
-        print("error sus --> ", movie_df.iloc[0])
 
         return {'name': movie_df.iloc[0].title, 'thumbnail': poster, 'synopsis': movie_df.iloc[0].overview, 'genre': movie_df.iloc[0].genres, 'cast': movie_df.iloc[0].cast}
 
