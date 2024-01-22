@@ -42,9 +42,12 @@ input:focus {
 	outline: none;
 }
 
-.content {
-	display: flex;
-	gap: 2rem;
+.library {
+	display: grid;
+	max-width: 100%;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 1rem;
+	overflow: scroll;
 }
 
 .card {
@@ -102,9 +105,6 @@ input:focus {
 	font-size: x-small;
 }
 
-.void {
-	align-items: center;
-	padding: 1rem;
-	width: 100%;
-	min-height: 100%;
+.row2 .card {
+	cursor: pointer;
 }

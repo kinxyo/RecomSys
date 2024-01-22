@@ -3,7 +3,7 @@
 <section>
 	<h2>You might also like</h2>
 
-	<div class="content">
+	<div class="library">
 		{% if history %} {% for movies in history %}
 		<div class="card">
 			<img class="poster" src="{{ movies.thumbnail }}" alt="Movie Poster" />
@@ -27,21 +27,34 @@
 			name="film"
 			type="text"
 			placeholder="Tell us your favourite movie" />
-		<img style="width: 1.5rem; aspect-ratio: 1/1;" class="link" onclick="RecommendMovies()" src="/static/assets/search.png" />
+		<img id="recommend-button" style="width: 1.5rem; aspect-ratio: 1/1;" class="link" src="/static/assets/search.png" />
 	</form>
 
-	<div
-		class="content grow-flex">
-		{% if recommendations %} {% for recom in recommendations %}
-		<div class="card">
-			<img class="poster" src="{{ recom.poster }}" alt="Movie Poster" />
-			<div class="curtain">
-				<h3>{{ recom.title }}</h3>
+	{% if searchresults %} 
+		<div class="library grow-flex">
+			{% for res in searchresults %}
+				<a href="{{ url_for('recom', movie_id=res.movie_id) }}">
+    				<div class="card">
+        				<img class="poster" src="{{ res.poster }}" alt="Movie Poster" />
+        				<div class="curtain">
+            				<h3>{{ res.title }}</h3>
+        				</div>
+    				</div>
+				</a>
+			{% endfor %}
+		</div>
+	{% else %}
+		{% if status==False  %}
+		<div class="grow-flex center">
+			<div class="words">
+				<h3>No Matching Results.</h3>
+                <br>
+				<h3>(╯°□°)╯︵ ┻━┻</h3>
 			</div>
 		</div>
-		{% endfor %} {% else %}
-		<div
-			class="void center">
+		{% endif %}
+		{% if status==True  %}
+		<div class="grow-flex center">
 			<div class="words">
 				<h3>Nothing yet to show.</h3>
                 <br>
@@ -49,7 +62,7 @@
 			</div>
 		</div>
 		{% endif %}
-	</div>
+	{% endif %}
 </div>
 
 {% endblock body %}
