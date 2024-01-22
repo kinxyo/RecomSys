@@ -13,13 +13,9 @@ colorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1666700638
 debugpy @ file:///D:/bld/debugpy_1660619187469/work
 decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1641555617451/work
 dnspython==2.3.0
-email-validator==2.0.0.post2
 entrypoints @ file:///home/conda/feedstock_root/build_artifacts/entrypoints_1643888246732/work
 Flask==2.2.5
-Flask-Bcrypt==1.0.1
-Flask-Login==0.6.3
 Flask-SQLAlchemy==3.0.5
-Flask-WTF==1.1.1
 gitdb==4.0.11
 GitPython==3.1.41
 greenlet==3.0.3
@@ -86,5 +82,4 @@ watchdog==3.0.0
 wcwidth @ file:///home/conda/feedstock_root/build_artifacts/wcwidth_1699959196938/work
 Werkzeug==2.2.3
 wincertstore==0.2
-WTForms==3.0.1
 zipp==3.15.0
