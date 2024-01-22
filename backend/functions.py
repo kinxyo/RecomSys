@@ -4,6 +4,7 @@ import requests
 
 # GLOBAL VARIABLES
 movies = pickle.load(open('backend/ml/out/tags.pkl','rb'))
+movies = movies.drop_duplicates(subset=['movie_id'])
 cinema = pickle.load(open('backend/ml/out/movie_list.pkl','rb'))
 similarity = pickle.load(open('backend/ml/out/similarity.pkl','rb'))
 
@@ -59,7 +60,7 @@ def recommend_from_history(movie):
         return
     
 def retrieve_movie(movie_id):
-    movie_df = cinema[movies['movie_id'] == movie_id]
+    movie_df = cinema[cinema['movie_id'] == movie_id]
     if not movie_df.empty:
         poster = fetch_poster(movie_id)
         
