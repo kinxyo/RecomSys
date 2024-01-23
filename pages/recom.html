@@ -4,19 +4,21 @@
 
         <div class="row1">
 
-            <div class="content curve">
+            <div style="justify-content: space-between;" class="content curve">
                 
                 <img id="poster" src="{{ star.thumbnail }}" />
-                <div style="display: flex; padding: 2rem; flex-direction: column; gap: 2rem; align-items: center;" class="text">
-                    <h2>{{ star.name }}</h2>
-                    <p> {{ star.synopsis }} </p>
-                    <p> <b>Genre:</b> {{ star.genre }} </p>
-                    <p> <b>Cast:</b> {{ star.cast }} </p>
+                <div style="display: flex; padding: 2rem; flex-direction: column; gap: 2rem; align-items: center;" class="text plate">
+                    <h1>{{ star.name }}</h1>
+                    <p style="font-size: larger;"> {{ star.synopsis }} </p>
+                    <!-- <p style="font-size: larger; background-color: rgba(19, 19, 19, 0.39); padding: 1rem; border-radius: 1rem;"> {{ star.synopsis }} </p> -->
+                    <div class="sub">
+                        <p> <b>Genre:</b> {{ star.genre }} </p>
+                        <p> <b>Cast:</b> {{ star.cast }} </p>
+                    </div>
                 </div>
                 
             </div>
             
-            <!-- <div style="background-color: palevioletred" class="bg-material">aksdjakjdh</div> -->
             <div style="background-image: url('{{ star.thumbnail }}')" class="bg-material"></div>
 
         </div>

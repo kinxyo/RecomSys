@@ -4,7 +4,6 @@ import requests
 
 # GLOBAL VARIABLES
 movies = pickle.load(open('backend/ml/out/tags.pkl','rb'))
-movies = movies.drop_duplicates(subset=['movie_id'])
 cinema = pickle.load(open('backend/ml/out/movie_list.pkl','rb'))
 similarity = pickle.load(open('backend/ml/out/similarity.pkl','rb'))
 
