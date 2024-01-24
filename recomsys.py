@@ -87,8 +87,3 @@ def recom(movie_id):
         recommendations.append({'id': id[i], 'title': movie[i], 'poster': poster[i]})
 
     return render_template("recom.html", recommendations=recommendations, star=retrieve_movie(movie_id))
-
-
-if __name__ == "__main__":
-    ml_recommendation()
-    app.run(host="0.0.0.0", port=5000, debug=True)
