@@ -1,7 +1,3 @@
-from ml_recommendation import ml_recommendation
-ml_recommendation()
-
-
 # IMPORTS
 import random
 from flask import Flask, render_template, request, redirect, url_for
