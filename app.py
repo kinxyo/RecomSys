@@ -1,6 +1,5 @@
 # IMPORTS
 import random
-import stat
 from flask import Flask, render_template, request, redirect, url_for
 from backend.functions import *
 from backend.models import Records, db

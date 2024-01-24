@@ -12,8 +12,8 @@ import pandas as pd
 # In[159]:
 
 
-movies = pd.read_csv('data/tmdb_5000_movies.csv')
-credits = pd.read_csv('data/tmdb_5000_credits.csv')
+movies = pd.read_csv('backend/ml/data/tmdb_5000_movies.csv')
+credits = pd.read_csv('backend/ml/data/tmdb_5000_credits.csv')
 
 
 # In[160]:
@@ -489,7 +489,7 @@ movies.head(2)
 
 
 import pickle
-pickle.dump(new_df,open('out/tags.pkl','wb'))
-pickle.dump(movies,open('out/movie_list.pkl','wb'))
-pickle.dump(similarity,open('out/similarity.pkl','wb'))
+pickle.dump(new_df,open('backend/ml/out/tags.pkl','wb'))
+pickle.dump(movies,open('backend/ml/out/movie_list.pkl','wb'))
+pickle.dump(similarity,open('backend/ml/out/similarity.pkl','wb'))
 
