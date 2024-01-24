@@ -1,3 +1,7 @@
+from ml_recommendation import ml_recommendation
+ml_recommendation()
+
+
 # IMPORTS
 import random
 from flask import Flask, render_template, request, redirect, url_for
@@ -90,4 +94,5 @@ def recom(movie_id):
 
 
 if __name__ == "__main__":
+    ml_recommendation()
     app.run(host="0.0.0.0", port=5000, debug=True)
