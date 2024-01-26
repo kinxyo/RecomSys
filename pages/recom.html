@@ -1,46 +1,50 @@
 {% extends 'base.html' %} {% block body %}
 
-    <div class="main">
+<div class="main">
+	<div class="row1">
+		<div style="justify-content: space-between" class="content curve">
+			<img id="poster" src="{{ star.thumbnail }}" />
+			<div
+				style="
+					display: flex;
+					padding: 2rem;
+					flex-direction: column;
+					gap: 2rem;
+					align-items: center;
+				"
+				class="text plate">
+				<h1>{{ star.name }}</h1>
+				<p style="font-size: larger">{{ star.synopsis }}</p>
+				<div class="sub">
+					<p><b>Genre:</b> {{ star.genre }}</p>
+					<p><b>Cast:</b> {{ star.cast }}</p>
+				</div>
+			</div>
+		</div>
 
-        <div class="row1">
+		<div
+			style="background-image: url('{{ star.thumbnail }}')"
+			class="bg-material"></div>
+	</div>
 
-            <div style="justify-content: space-between;" class="content curve">
-                
-                <img id="poster" src="{{ star.thumbnail }}" />
-                <div style="display: flex; padding: 2rem; flex-direction: column; gap: 2rem; align-items: center;" class="text plate">
-                    <h1>{{ star.name }}</h1>
-                    <p style="font-size: larger;"> {{ star.synopsis }} </p>
-                    <!-- <p style="font-size: larger; background-color: rgba(19, 19, 19, 0.39); padding: 1rem; border-radius: 1rem;"> {{ star.synopsis }} </p> -->
-                    <div class="sub">
-                        <p> <b>Genre:</b> {{ star.genre }} </p>
-                        <p> <b>Cast:</b> {{ star.cast }} </p>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <div style="background-image: url('{{ star.thumbnail }}')" class="bg-material"></div>
+	<div class="row2">
+		<div class="library grow-flex">
+			{% for recom in recommendations %}
+			<a href="{{ url_for('recom', movie_id=recom.id) }}">
+				<div class="card">
+					<img class="poster" src="{{ recom.poster }}" alt="Movie Poster" />
+					<div class="curtain">
+						<h3>{{ recom.title }}</h3>
+					</div>
+				</div>
+			</a>
+			{% endfor %}
+		</div>
+	</div>
+</div>
 
-        </div>
+<script
+	type="module"
+	src="{{ url_for('static', filename='js/script.js') }}"></script>
 
-
-        <div class="row2">
-            
-            <div class="library grow-flex">
-                {% for recom in recommendations %}
-                        <a href="{{ url_for('recom', movie_id=recom.id) }}">
-                            <div class="card">
-                                <img class="poster" src="{{ recom.poster }}" alt="Movie Poster" />
-                                <div class="curtain">
-                                    <h3>{{ recom.title }}</h3>
-                                </div>
-                            </div>
-                        </a>
-                {% endfor %}
-            </div>
-            
-        </div>
-        
-    </div>
-    
-    {% endblock body %}
+{% endblock body %}

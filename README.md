@@ -1,31 +1,8 @@
-> [!IMPORTANT]
-> Work In Progress.
-
 # CinemaScope
+![Frame 12](https://github.com/kinxyo/RecomSys/assets/90744941/979e90f7-2387-4708-ae06-cb3390e90a1c)
 
-## About
-Have you ever grown tired of conventional films and just wished to discover something fresh yet similar to your preferences?
-Well, this is a _machine learning_ solution for it.<br>
-This webapp is developed to personalize movie recommendations, catering to unique user preferences.<br>
-All you have to do is, simply choose a movie that you enjoy and we will immediately suggest a collection of films that suit your taste.
-<br>
-<br>
-![recomsys](https://github.com/kinxyo/RecomSys/assets/90744941/07484206-dfcb-4ea9-babb-0edbc7bd1ab2)
-<br>
-<br>
-To take this one-step further, we have enhanced our recommendations by utilizing search history data to gain a comprehensive understanding of user preferences. This allows us to get bigger picture of one's taste.
-### Concept
-- Our product is powered by machine learning. 
-- Data pulled from the dataset is placed into a numpy array to achieve a vector form.
-- We have trained our ml model on the **Cosine Similarity** metric, which allows it to measure similiarity between vectors.
-- Once we have our vectors ready, cosine_similarity() is called on them to calculate the cosine similarity between the two vectors.
-- Value of the metric lies between 0 & 1. The closer it's to 1, the more similiarity there appear to be.
-
-#### Learn More
-[Cosine Similarity](https://www.learndatasci.com/glossary/cosine-similarity/)
-<br>
-[Dataset Used](https://www.kaggle.com/tmdb/tmdb-movie-metadata?select=tmdb_5000_movies.csv)
-
+# POSTERINTRO
+![recomsys-readme_poster](https://github.com/kinxyo/RecomSys/assets/90744941/30381925-9b0a-4325-847e-8af255789fe6)
 ## How To Use
 
 ### Setup
@@ -33,30 +10,36 @@ To take this one-step further, we have enhanced our recommendations by utilizing
 ```
 https://github.com/kinxyo/RecomSys.git
 ```
-#### Create & Activate Conda Environment
+#### Enter Virtual Env 
 ```
-conda create -n movie python=3.7.10 -y
+py -3 -m venv cinema
 ```
 ```
-source activate movie
+source cinema/scripts/activate
 ```
 #### Install Requirements
 ```
 pip install -r requirements.txt
 ```
-#### Generate Artifacts (Model Output)
-_Run **ml_recommendation.ipynb** file_
+#### Generate Artifacts (Output Model)
+```
+python ml.py
+```
 
 ### Run
 ```
-python app.py
+python wsgi.py
 ```
-
+![recom_sissy_demo](https://github.com/kinxyo/RecomSys/assets/90744941/8b0ce292-c0e4-4c7b-8fca-c4d0ae969cbe)
 ## Closing Remarks
-We've remade our previous Streamlit app in Flask to expand upon functionalities and provide a more mordern touch to the UI.
+Done as part of a college project.
 <br>
-### TEAM
-- Kinjalk 
-- [Gitansh](https://github.com/Gitansh-Agarwal)
-- [Om](https://github.com/Ashu-Pablo) 
-- [Himanshu](https://github.com/xendai66)
+<br>
+We have also put the jupyter notebook in it for easy modification of tags for recommendation system.
+To convert it into python script:
+```
+jupyter nbconvert --to script YourNotebook.ipynb
+```
+You can learn more about **Cosine Similarity** [here](https://www.learndatasci.com/glossary/cosine-similarity/).
+<br>
+Find **Dataset** [here](https://www.kaggle.com/tmdb/tmdb-movie-metadata?select=tmdb_5000_movies.csv).
