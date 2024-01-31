@@ -1,496 +1,478 @@
-def process_dataset():
-    #!/usr/bin/env python
-    # coding: utf-8
+#!/usr/bin/env python
+# coding: utf-8
 
-    # ## Content Based Recommender System
+# ## Content Based Recommender System
 
-    # In[158]:
+# In[1]:
 
 
-    import pandas as pd
+import pandas as pd
 
 
-    # In[159]:
+# In[2]:
 
 
-    movies = pd.read_csv('backend/ml/data/tmdb_5000_movies.csv')
-    credits = pd.read_csv('backend/ml/data/tmdb_5000_credits.csv')
+movies = pd.read_csv('backend/ml/data/tmdb_5000_movies.csv')
+credits = pd.read_csv('backend/mldata/tmdb_5000_credits.csv')
 
 
-    # In[160]:
+# In[3]:
 
 
-    movies.head(2)
+movies.head(2)
 
 
-    # In[161]:
+# In[4]:
 
 
-    movies.shape
+movies.shape
 
 
-    # In[162]:
+# In[5]:
 
 
-    credits.head()
+credits.head()
 
 
-    # In[163]:
+# In[6]:
 
 
-    credits.shape
+credits.shape
 
 
-    # In[164]:
+# In[7]:
 
 
-    movies = movies.merge(credits,on='title')
+movies = movies.merge(credits,on='title')
 
 
-    # In[165]:
+# In[8]:
 
 
-    movies.head(2)
+movies.head(2)
 
 
-    # In[166]:
+# In[9]:
 
 
-    movies.shape
+movies.shape
 
 
-    # In[167]:
+# In[10]:
 
 
-    # Keeping important columns for recommendation
-    movies = movies[['movie_id','title','overview','genres','keywords','cast','crew']]
+# Keeping important columns for recommendation
+movies = movies[['movie_id','title','overview','genres','keywords','cast','crew']]
 
 
-    # In[168]:
+# In[11]:
 
 
-    movies.head(2)
+movies.head(2)
 
 
-    # In[169]:
+# In[12]:
 
 
-    movies.shape
+movies.shape
 
 
-    # In[170]:
+# In[13]:
 
 
-    movies.isnull().sum()
+movies.isnull().sum()
 
 
-    # In[171]:
+# In[14]:
 
 
-    movies.dropna(inplace=True)
+movies.dropna(inplace=True)
 
 
-    # In[172]:
+# In[15]:
 
 
-    movies.isnull().sum()
+movies.isnull().sum()
 
 
-    # In[173]:
+# In[16]:
 
 
-    movies.shape
+movies.shape
 
 
-    # In[174]:
+# In[17]:
 
 
-    movies.duplicated().sum()
+movies.duplicated().sum()
 
 
-    # In[175]:
+# In[18]:
 
 
-    # handle genres
+# handle genres
 
-    movies.iloc[0]['genres']
+movies.iloc[0]['genres']
 
 
-    # In[ ]:
+# In[ ]:
 
 
 
 
 
-    # In[176]:
+# In[19]:
 
 
-    import ast #for converting str to list
+import ast #for converting str to list
 
-    def convert(text):
-        L = []
-        for i in ast.literal_eval(text):
-            L.append(i['name']) 
-        return L
+def convert(text):
+    L = []
+    for i in ast.literal_eval(text):
+        L.append(i['name']) 
+    return L
 
 
-    # In[177]:
+# In[20]:
 
 
-    movies['genres'] = movies['genres'].apply(convert)
+movies['genres'] = movies['genres'].apply(convert)
 
 
-    # In[178]:
+# In[21]:
 
 
-    movies.head()
+movies.head()
 
 
-    # In[179]:
+# In[22]:
 
 
-    # handle keywords
-    movies.iloc[0]['keywords']
+# handle keywords
+movies.iloc[0]['keywords']
 
 
-    # In[180]:
+# In[23]:
 
 
-    movies['keywords'] = movies['keywords'].apply(convert)
-    movies.head()
+movies['keywords'] = movies['keywords'].apply(convert)
+movies.head()
 
 
-    # In[181]:
+# In[24]:
 
 
-    # handle cast
-    movies.iloc[0]['cast']
+# handle cast
+movies.iloc[0]['cast']
 
 
-    # In[182]:
+# In[25]:
 
 
-    # Here i am just keeping top 3 cast
+# only keeping top 3 cast members
 
-    def convert_cast(text):
-        L = []
-        counter = 0
-        for i in ast.literal_eval(text):
-            if counter < 3:
-                L.append(i['name'])
-            counter+=1
-        return L
+def convert_cast(text):
+    L = []
+    counter = 0
+    for i in ast.literal_eval(text):
+        if counter < 3:
+            L.append(i['name'])
+        counter+=1
+    return L
 
 
-    # In[183]:
+# In[26]:
 
 
-    movies['cast'] = movies['cast'].apply(convert_cast)
-    movies.head()
+movies['cast'] = movies['cast'].apply(convert_cast)
+movies.head()
 
 
-    # In[184]:
+# In[27]:
 
 
-    # handle crew
+# handle crew
 
-    movies.iloc[0]['crew']
+movies.iloc[0]['crew']
 
 
-    # In[185]:
+# In[28]:
 
 
-    def fetch_director(text):
-        L = []
-        for i in ast.literal_eval(text):
-            if i['job'] == 'Director':
-                L.append(i['name'])
-                break
-        return L
+def fetch_director(text):
+    L = []
+    for i in ast.literal_eval(text):
+        if i['job'] == 'Director':
+            L.append(i['name'])
+            break
+    return L
 
 
-    # In[186]:
+# In[29]:
 
 
-    movies['crew'] = movies['crew'].apply(fetch_director)
+movies['crew'] = movies['crew'].apply(fetch_director)
 
 
-    # In[187]:
+# In[30]:
 
 
-    movies.head()
+movies.head()
 
 
-    # In[188]:
+# In[31]:
 
 
-    # handle overview (converting to list)
+# handle overview (converting to list because we will use count vectorizer)
 
-    movies.iloc[0]['overview']
+movies.iloc[0]['overview']
 
 
-    # In[189]:
+# In[32]:
 
 
-    movies['overview'] = movies['overview'].apply(lambda x:x.split())
-    movies.sample(4)
+movies['overview'] = movies['overview'].apply(lambda x:x.split())
+movies.sample(4)
 
 
-    # In[190]:
+# In[33]:
 
 
-    movies.iloc[0]['overview']
+movies.iloc[0]['overview']
 
 
-    # In[191]:
+# In[34]:
 
 
-    # now removing space like that 
-    'Anna Kendrick'
-    'AnnaKendrick'
+# removing space
+'Bradley Cooper'
+'BradleyCooper'
 
-    def remove_space(L):
-        L1 = []
-        for i in L:
-            L1.append(i.replace(" ",""))
-        return L1
+def remove_space(L):
+    L1 = []
+    for i in L:
+        L1.append(i.replace(" ",""))
+    return L1
 
 
-    # In[192]:
+# In[35]:
 
 
-    movies['cast'] = movies['cast'].apply(remove_space)
+movies['cast'] = movies['cast'].apply(remove_space)
 
 
-    # In[193]:
+# In[36]:
 
 
-    movies.head()
+movies.head()
 
 
-    # In[194]:
+# In[37]:
 
 
-    # Concatinate all
-    movies['tags'] = movies['overview'] + movies['genres'] + movies['keywords'] + movies['cast'] + movies['crew']
+# Concatinate all
+movies['tags'] = movies['overview'] + movies['genres'] + movies['keywords'] + movies['cast'] + movies['crew']
 
 
-    # In[195]:
+# In[38]:
 
 
-    movies.head()
+movies.head()
 
 
-    # In[196]:
+# In[39]:
 
 
-    movies.iloc[0]['tags']
+movies.iloc[0]['tags']
 
 
-    # In[197]:
+# In[40]:
 
 
-    movies.head(5)
+movies.head(5)
 
 
-    # In[198]:
+# In[41]:
 
 
-    # droping those extra columns
-    new_df = movies[['movie_id','title','tags']].copy()
+movies.head()
 
 
-    # In[199]:
+# In[42]:
 
 
-    movies.head(5)
+# Converting list to str
+movies['tags'] = movies['tags'].apply(lambda x: " ".join(x))
+movies.head()
 
 
-    # In[200]:
+# In[43]:
 
 
-    new_df.head()
+# Converting to lower case
+movies['tags'] = movies['tags'].apply(lambda x:x.lower())
 
 
-    # In[201]:
+# In[44]:
 
 
-    # Converting list to str
-    new_df['tags'] = new_df['tags'].apply(lambda x: " ".join(x))
-    new_df.head()
+movies.iloc[0]['tags']
 
 
-    # In[202]:
+# In[45]:
 
 
-    # Converting to lower case
-    new_df['tags'] = new_df['tags'].apply(lambda x:x.lower())
+# Removing corrupted and redundant data
+index_names = movies[movies['movie_id'] == 113406].index
+movies.drop(index_names, inplace=True)
+index_names = movies[movies['movie_id'] == 112430].index
+movies.drop(index_names, inplace=True)
+index_names = movies[movies['movie_id'] == 181940].index
+movies.drop(index_names, inplace=True)
+movies = movies.drop_duplicates(subset=['movie_id'])
 
 
-    # In[203]:
+# In[46]:
 
 
-    new_df.iloc[0]['tags']
+movies.head()
 
 
-    # In[204]:
+# In[47]:
 
 
-    # Removing corrupted and redundant data
-    index_names = new_df[new_df['movie_id'] == 113406].index
-    new_df.drop(index_names, inplace=True)
-    new_df = new_df.drop_duplicates(subset=['movie_id'])
+from nltk.stem import PorterStemmer
 
 
-    # In[205]:
+# In[48]:
 
 
-    new_df.head()
+ps = PorterStemmer()
 
 
-    # In[206]:
+# In[49]:
 
 
-    from nltk.stem import PorterStemmer
+""" Stemming helps to reduce the dimentionality of the data
+ and to focus on the meaning of the word rather than their form. """
 
+def stems(text):
+    T = []
+    
+    for i in text.split():
+        T.append(ps.stem(i))
+    
+    return " ".join(T)
 
-    # In[207]:
 
+# In[50]:
 
-    ps = PorterStemmer()
 
+movies['tags'] = movies['tags'].apply(stems)
 
-    # In[208]:
 
+# In[51]:
 
-    """ Stemming helps to reduce the dimentionality of the data
-    and to focus on the meaning of the word rather than their form. """
 
-    def stems(text):
-        T = []
-        
-        for i in text.split():
-            T.append(ps.stem(i))
-        
-        return " ".join(T)
+movies.iloc[0]['tags']
 
 
-    # In[209]:
+# In[52]:
 
 
-    new_df['tags'] = new_df['tags'].apply(stems)
+from sklearn.feature_extraction.text import CountVectorizer
+cv = CountVectorizer(max_features=5000,stop_words='english')
 
 
-    # In[210]:
+# In[53]:
 
 
-    new_df.iloc[0]['tags']
+vector = cv.fit_transform(movies['tags']).toarray()
 
 
-    # In[211]:
+# In[54]:
 
 
-    from sklearn.feature_extraction.text import CountVectorizer
-    cv = CountVectorizer(max_features=5000,stop_words='english')
+vector[0]
 
 
-    # In[212]:
+# In[55]:
 
 
-    vector = cv.fit_transform(new_df['tags']).toarray()
+vector.shape
 
 
-    # In[213]:
+# In[56]:
 
 
-    vector[0]
+len(cv.get_feature_names_out())
 
 
-    # In[214]:
+# In[57]:
 
 
-    vector.shape
+from sklearn.metrics.pairwise import cosine_similarity
 
 
-    # In[215]:
+# In[58]:
 
 
-    len(cv.get_feature_names_out())
+similarity = cosine_similarity(vector)
 
 
-    # In[216]:
+# In[59]:
 
 
-    from sklearn.metrics.pairwise import cosine_similarity
+similarity.shape
 
 
-    # In[217]:
+# In[60]:
 
 
-    similarity = cosine_similarity(vector)
+movies[movies['title'] == 'The Lego Movie'].index[0]
 
 
-    # In[218]:
+# In[61]:
 
 
-    similarity.shape
+def recommend(movie):
+    index = movies[movies['title'] == movie].index[0]
+    distances = sorted(list(enumerate(similarity[index])),reverse=True,key = lambda x: x[1])
+    for i in distances[1:6]:
+        print(movies.iloc[i[0]].title)
 
 
-    # In[219]:
+# In[62]:
 
 
-    new_df[new_df['title'] == 'The Lego Movie'].index[0]
+recommend('Spider-Man 2')
 
 
-    # In[220]:
+# In[63]:
 
 
-    def recommend(movie):
-        index = new_df[new_df['title'] == movie].index[0]
-        distances = sorted(list(enumerate(similarity[index])),reverse=True,key = lambda x: x[1])
-        for i in distances[1:6]:
-            print(new_df.iloc[i[0]].title)
+movies.head(2)
 
 
-    # In[221]:
+# In[64]:
 
 
-    recommend('Spider-Man 2')
+movies['overview'] = movies['overview'].apply(lambda x: " ".join(x))
+movies['genres'] = movies['genres'].apply(lambda x: " ".join(x))
+movies['cast'] = movies['cast'].apply(lambda x: " ".join(x))
+movies['crew'] = movies['crew'].apply(lambda x: " ".join(x))
 
 
-    # In[222]:
 
+# In[65]:
 
-    movies.head(2)
 
+movies.head(5)
 
-    # In[223]:
 
+# In[66]:
 
-    movies['overview'] = movies['overview'].apply(lambda x: " ".join(x))
-    movies['genres'] = movies['genres'].apply(lambda x: " ".join(x))
-    movies['cast'] = movies['cast'].apply(lambda x: " ".join(x))
-    movies['crew'] = movies['crew'].apply(lambda x: " ".join(x))
 
-
-
-    # In[224]:
-
-
-    movies.head(5)
-
-
-    # In[225]:
-
-
-    movies.head(2)
-
-
-    # In[226]:
-
-
-    import pickle
-    pickle.dump(new_df,open('backend/ml/out/tags.pkl','wb'))
-    pickle.dump(movies,open('backend/ml/out/movie_list.pkl','wb'))
-    pickle.dump(similarity,open('backend/ml/out/similarity.pkl','wb'))
-
+import pickle
+pickle.dump(movies,open('backend/ml/out/cinema.pkl','wb'))
+pickle.dump(similarity,open('backend/ml/out/metric.pkl','wb'))

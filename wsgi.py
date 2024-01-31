@@ -1,4 +1,4 @@
-# make sure you've run ml.py first to generate the model
+# make sure you've run `MLrecommendation.ipynb` OR `ml.py` first to generate the model
 
 from app import app
 
