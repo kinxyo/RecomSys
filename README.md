@@ -1,94 +1,94 @@
 # CinemaScope
 
-![recom_sissy_demo](https://github.com/kinxyo/RecomSys/assets/90744941/8b0ce292-c0e4-4c7b-8fca-c4d0ae969cbe)
+<div style="color: red;">This is an experiment branch.</div>
 
-## About
+The aim is to:
 
-**Have you ever grown tired of conventional films and just wished to discover something fresh yet similar to your preferences?**
+1. Shift the backend to Go **for faster performance & scalability**.
+2. Introduce Vue (signals) in the frontend **for performance and ease**.
+3. Improve ML solution **for making product actually useful**.
+    - Use a quality data-set
+    - Include more multi-media.
+    - Use real-world algorithm.
+    - Add account management.
 
-_CinemaScope_ commits to solve this problem by utilizing machine learning. This webapp is developed to personalize movie recommendations, catering to unique user preferences. To take this a step further, we also provide recommendations by utilizing search history data to gain a comprehensive understanding of user preferences. This allows us to get bigger picture of one's taste. Our application is built using Flask.
+> [!NOTE]
+> May use `SurrealDB` for everthing.
 
-## Theory
+**Takeaways** (or benefits):
 
-- In our _movie recommendation system_, we used **cosine similarity** to measure the similarity between different movies based on certain features. 
-- These features could include aspects like genre, director, actors, and keywords from the movie's description. 
-- Each movie is represented as a multi-dimensional vector of these features. The cosine similarity between any two movies is then calculated by taking the dot product of their feature vectors and dividing by the product of their magnitudes.
-- This results in a similarity score between -1 and 1, where 1 means the movies are identical in terms of the features considered, 0 means they are completely dissimilar, and -1 means they are diametrically opposite.
-- By calculating the cosine similarity between the movie a user has watched and all other movies in our database, we can recommend the movies with the highest similarity scores, thus personalizing the recommendations to the user's unique preferences.
+Getting to learn these things are highly valuable:-
 
-![Frame 12](https://github.com/kinxyo/RecomSys/assets/90744941/979e90f7-2387-4708-ae06-cb3390e90a1c)
+1. Working with Signals in JavaScript.
+2. Creating backend with Go.
+3. Streamlining data-collection and auto-updating relevant data.
+4. Knowing how to work with Vector database.
 
-## How To Use
+## But what about the python code?
 
-### Setup
+The core Python functions will remain as it, **Python code will not be obselete**; infact they will be improved to meet quality.
 
-#### Clone Repository
+**It will be integrated as a microservice**. This is because the ML development still very much relies on Python due its mature echo-system. Hence, the Python functions will be consumed via APIs; which will be exposed via [FastAPI](https://fastapi.tiangolo.com/).
 
-```bash
-git clone https://github.com/kinxyo/RecomSys.git
-```
+However,
+**Flask will be removed** as FastAPI offers much developer-friendly experience on top of being faster and offering asynchronous functions.
 
-#### Enter Virtual Env 
+## Roadmap
 
-```bash
-py -3 -m venv cinema
-```
+The below planning is divided into phases. It's a high-level overview.
 
-```bash
-source cinema/scripts/activate
-```
+Each phase should take maximum 1-2 months.
 
-#### Install Requirements
+### #1 Architecture
 
-```bash
-pip install -r requirements.txt
-```
+Concurrently proceed with:
 
-#### Generate Artifacts (Output Model)
+1. Replacing `Flask` with `Go`.
+2. Expose existing Python functions as API; using `FastAPI`.
 
-```bash
-python ml.py
-```
+> [!NOTE]
+> No need to modify `html` files, as `Go`'s templating syntax is almost same as `Jinja`.
 
-### Run
-
-```bash
-python wsgi.py
-```
-
-## Jupyter Notebook
-
-You will also find a Jupyter Notebook in the repository. You can easily configure the tags and other algorithm-related stuff in it so you are able to generate your own artifacts by running the notebook.
-
-The notebook will ask for selecting a kernel, select `cinema` from the dropdown menu. This will ensure that the notebook uses the same environment as the project.
-Also, before running the notebook, make sure you have installed the following package:
+#### Project Structure
 
 ```bash
-pip install ipykernel
+.
+├── core
+├── microservice
+├── main.go
+├── README.md
+└── templates
+    ├── support
+    └── addons
 ```
 
-To convert the notebook to a python script, run the following command in the terminal:
+The project structure is different from usual. I went ahead and structured it according to what made most sense to me. **It represents how I think of the project.**
 
-```bash
-pip install nbconvert
-```
+1. `core/`: contains controller or main program modules.
+2. `microservice/`: virtual environment for FastAPI code.
+3. `main.go`: binary for the application (entry point).
+4. `templates/`: contains webpages to show.
+    - `support/`: contains the static elements such as javascript and css files.
+    - `addons`: contains stuff like images and fonts.
 
-```bash
-cd backend/ml
-```
+### #2 ML Solution
 
-```bash
-jupyter nbconvert --to script YourNotebook.ipynb
-```
+1. Create custom data-set by Streamlining the process of data-collection & automating its updation.
+2. Use `Qdrant` as vector database; for training ML model. (NOT FINAL).
+3. Research on improving algorithm; improve the algorithm for a single-user experience.
 
-## Closing Remarks
+### #3 User Experience
 
-Done as part of a college project.
+1. Add `Vue` Signals to the frontend.
+    - Break frontend into components to achieve better frontend code organisation.
+    - Handle revelant things client-side with ease, as uptil now all things were being done by the server (WHICH IS ANNOYING).
+2. Use `SurrealDB` for database and caching (NOT FINAL).
+3. Implement account management for multi-user experience.
 
-You can learn more about **Cosine Similarity** [here](https://www.learndatasci.com/glossary/cosine-similarity/).
+### #4 Polishing
 
-Find **Dataset** [here](https://www.kaggle.com/tmdb/tmdb-movie-metadata?select=tmdb_5000_movies.csv).
+Look for more improvements along the way, then implement them.
 
-## Project Poster
+---
 
-![recomsys-readme_poster](https://github.com/kinxyo/RecomSys/assets/90744941/30381925-9b0a-4325-847e-8af255789fe6)
+This can be a great final-year project.
