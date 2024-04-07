@@ -62,8 +62,6 @@ Concurrently proceed with:
     └── addons
 ```
 
-The project structure is different from usual. I went ahead and structured it according to what made most sense to me. **It represents how I think of the project.**
-
 1. `core/`: contains controller or main program modules.
 2. `microservice/`: virtual environment for FastAPI code.
 3. `main.go`: binary for the application (entry point).
